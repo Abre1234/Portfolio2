@@ -1,126 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abraraw Ayal — Data Scientist Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Portfolio</title>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="profile">
-        <img class="profile-img" src="profile.jpg" alt="Profile">
-        <div class="intro">
-          <h1>Abraraw Ayal</h1>
-          <p class="role">Data Scientist • Machine Learning Engineer • AI Developer</p>
-          <p class="bio">Focused on applied machine learning, AI systems, and data‑driven solutions. I design production‑ready models and deploy real-time intelligent systems for real-world impact.</p>
-          <p class="contact">GitHub: <a href="https://github.com/Abre1234" target="_blank" rel="noopener">@Abre1234</a></p>
-        </div>
-      </div>
-
-      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
-
-      <nav class="main-nav" id="main-nav">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section id="projects" class="projects-section container">
-      <h2>Featured Projects</h2>
-      <p class="lead">Practical, industry‑aligned data science and machine learning projects. Every project includes full GitHub source code, notebooks, and documentation.</p>
-
-      <div class="projects-grid">
-
-        <a class="project-card" href="https://github.com/Abre1234/CarPricePrediction" target="_blank" rel="noopener">
-          <img src="carprice.png" alt="Car Price Prediction">
-          <div class="card-body">
-            <h3>Car Price Prediction</h3>
-            <p>End‑to‑end regression pipeline using advanced feature engineering and XGBoost to estimate market values of used vehicles.</p>
-          </div>
-        </a>
-
-        <a class="project-card" href="https://github.com/Abre1234/IrisClassification" target="_blank" rel="noopener">
-          <img src="iris.png" alt="Iris Classification">
-          <div class="card-body">
-            <h3>Iris Classification</h3>
-            <p>Interactive machine learning classification project with visual analytics and model comparison dashboards.</p>
-          </div>
-        </a>
-
-        <a class="project-card" href="https://github.com/Abre1234/SalesForecasting" target="_blank" rel="noopener">
-          <img src="sales.png" alt="Sales Forecasting">
-          <div class="card-body">
-            <h3>Sales Forecasting</h3>
-            <p>Time‑series forecasting using ARIMA, Prophet, and LSTM models with a Streamlit application for real‑time predictions.</p>
-          </div>
-        </a>
-
-        <a class="project-card" href="https://github.com/Abre1234/UnemploymentForecast" target="_blank" rel="noopener">
-          <img src="unemployment.png" alt="Unemployment Forecast">
-          <div class="card-body">
-            <h3>Unemployment Forecast</h3>
-            <p>Forecasting labor market trends with decomposition, feature engineering, and statistical modeling.</p>
-          </div>
-        </a>
-
-        <a class="project-card" href="https://github.com/Abre1234/Smart-Vehicle-Monitoring-System" target="_blank" rel="noopener">
-          <img src="vehicle.png" alt="Vehicle Detection and Tracking System">
-          <div class="card-body">
-            <h3>Smart Vehicle Monitoring System</h3>
-            <p>Real‑time vehicle detection, direction recognition, OCR‑based ID extraction, and tracking for urban mobility systems.</p>
-          </div>
-        </a>
-
-        <a class="project-card" href="https://github.com/Abre1234/CostPerKm-Predictor" target="_blank" rel="noopener">
-          <img src="costkm.png" alt="Cost per KM Prediction">
-          <div class="card-body">
-            <h3>Cost‑per‑KM Prediction</h3>
-            <p>ML model predicting transportation cost‑per‑km using fuel prices, car type, road type, level, and temporal patterns.</p>
-          </div>
-        </a>
-
-      </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="home">
+        <h1>Welcome to My Portfolio</h1>
     </section>
-
-    <section id="about" class="container about-section">
-      <h2>About Me</h2>
-      <p>I am a third‑year Data Science student and aspiring AI engineer passionate about building intelligent systems that solve practical problems. My work spans classical machine learning, time‑series analysis, computer vision, and deployable real‑time solutions. I enjoy taking ideas from concept → data → model → production.</p>
-
-      <p>Recently, I have been working on transport and logistics AI systems such as vehicle recognition, cost‑estimation modeling, and urban mobility analytics. I believe in building technology that delivers measurable impact for communities and organizations.</p>
+    <section id="about">
+        <h2>About Me</h2>
     </section>
-
-    <section id="skills" class="container skills-section">
-      <h2>Technical Skills</h2>
-      <ul class="skills">
-        <li>Python (pandas, NumPy, scikit‑learn, XGBoost, TensorFlow)</li>
-        <li>Machine Learning, Deep Learning, NLP</li>
-        <li>Time‑Series Modeling (ARIMA, Prophet, LSTM)</li>
-        <li>Computer Vision (OpenCV, CNN‑based recognition)</li>
-        <li>Data Visualization (matplotlib, seaborn, plotly)</li>
-        <li>Model Deployment (Streamlit, Flask, Docker)</li>
-        <li>SQL, Experimentation, Statistical Analysis</li>
-      </ul>
+    <section id="skills">
+        <h2>Skills</h2>
     </section>
-
-    <section id="contact" class="container contact-section">
-      <h2>Contact</h2>
-      <p><strong>GitHub:</strong> <a href="https://github.com/Abre1234" target="_blank" rel="noopener">@Abre1234</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/Abre1234" target="_blank" rel="noopener">linkedin.com/in/Abre1234</a></p>
-      <p><strong>Email:</strong> abrarawayu@example.com</p>
-      <p><strong>Location:</strong> Bahir Dar, Ethiopia</p>
+    <section id="projects">
+        <h2>Projects</h2>
     </section>
-  </main>
-
-  <footer class="site-footer container">
-    <p>&copy; 2025 Abraraw Ayal — Data Scientist</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <section id="contact">
+        <h2>Contact</h2>
+    </section>
 </body>
 </html>
