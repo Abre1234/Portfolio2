@@ -363,3 +363,31 @@ footer {
     0% { opacity: 0; transform: rotate(-360deg); }
     100% { opacity: 1; transform: rotate(0deg); }
 }
+/* ===== SCROLL REVEAL ACTIVE ===== */
+.active-reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease-out;
+}
+
+section {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+/* ===== ACTIVE NAV LINK ===== */
+.nav-links li a.active-link {
+    color: #fbbf24;
+    font-weight: 700;
+}
+
+/* ===== PARTICLES CANVAS ===== */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
