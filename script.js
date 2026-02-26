@@ -1,173 +1,358 @@
-// ===== HAMBURGER MENU =====
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+// ===============================
+// ABRARAW AYAL PORTFOLIO SCRIPT
+// Professional Interactive JS
+// ===============================
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+document.addEventListener("DOMContentLoaded", function () {
 
-// ===== ACTIVE NAV LINK ON SCROLL =====
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-links li a');
+    // ===============================
+    // THEME TOGGLE
+    // ===============================
+    const themeToggle = document.getElementById("theme-toggle");
+    const body = document.body;
+    const icon = themeToggle?.querySelector("i");
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+        body.classList.add("light-mode");
+        icon?.classList.replace("fa-moon", "fa-sun");
+    }
+
+    themeToggle?.addEventListener("click", () => {
+
+        body.classList.toggle("light-mode");
+
+        if (body.classList.contains("light-mode")) {
+            localStorage.setItem("theme", "light");
+            icon?.classList.replace("fa-moon", "fa-sun");
+        } else {
+            localStorage.setItem("theme", "dark");
+            icon?.classList.replace("fa-sun", "fa-moon");
         }
+
     });
 
-    navItems.forEach(a => {
-        a.classList.remove('active-link');
-        if (a.getAttribute('href').includes(current)) {
-            a.classList.add('active-link');
+
+    // ===============================
+    // MOBILE MENU
+    // ===============================
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-links");
+
+    hamburger?.addEventListener("click", () => {
+
+        navMenu.classList.toggle("active");
+        hamburger.classList.toggle("active");
+
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("active");
+            hamburger.classList.remove("active");
+
+        });
+
+    });
+
+
+    // ===============================
+    // SMOOTH SCROLL
+    // ===============================
+    document.querySelectorAll("a[href^='#']").forEach(anchor => {
+
+        anchor.addEventListener("click", function (e) {
+
+            e.preventDefault();
+
+            const target = document.querySelector(this.getAttribute("href"));
+
+            if (target) {
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+
+
+    // ===============================
+    // SCROLL PROGRESS BAR
+    // ===============================
+    const progressBar = document.getElementById("progress-bar");
+
+    window.addEventListener("scroll", () => {
+
+        const scrollTop = document.documentElement.scrollTop;
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        const progress = (scrollTop / height) * 100;
+
+        if (progressBar)
+            progressBar.style.width = progress + "%";
+
+    });
+
+
+    // ===============================
+    // ACTIVE NAV LINK ON SCROLL
+    // ===============================
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    window.addEventListener("scroll", () => {
+
+        let current = "";
+
+        sections.forEach(section => {
+
+            const sectionTop = section.offsetTop - 100;
+
+            if (scrollY >= sectionTop)
+                current = section.getAttribute("id");
+
+        });
+
+        navLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (link.getAttribute("href") === "#" + current)
+                link.classList.add("active");
+
+        });
+
+    });
+
+
+    // ===============================
+    // SCROLL REVEAL ANIMATION
+    // ===============================
+    const revealElements = document.querySelectorAll(
+
+        ".reveal, .project-card, .skill-card, .course-card"
+
+    );
+
+    const revealObserver = new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("active");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.1
         }
+
+    );
+
+    revealElements.forEach(el => {
+
+        revealObserver.observe(el);
+
     });
-});
 
-// ===== SMOOTH SCROLL =====
-navItems.forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth' });
-    });
-});
 
-// ===== SCROLL REVEAL ANIMATIONS =====
-const revealElements = document.querySelectorAll('section');
+    // ===============================
+    // TYPING EFFECT
+    // ===============================
+    const typingElement = document.getElementById("typing");
 
-const revealOnScroll = () => {
-    const windowHeight = window.innerHeight;
-    revealElements.forEach(section => {
-        const revealTop = section.getBoundingClientRect().top;
-        if (revealTop < windowHeight - 100) {
-            section.classList.add('active-reveal');
+    const texts = [
+
+        "Data Scientist",
+        "Machine Learning Engineer",
+        "AI Developer",
+        "Data Analyst",
+        "Python Developer"
+
+    ];
+
+    let index = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+
+        if (!typingElement) return;
+
+        const currentText = texts[index];
+
+        if (isDeleting) {
+
+            typingElement.textContent =
+                currentText.substring(0, charIndex--);
+
+        } else {
+
+            typingElement.textContent =
+                currentText.substring(0, charIndex++);
+
         }
+
+        if (!isDeleting && charIndex === currentText.length) {
+
+            isDeleting = true;
+            setTimeout(typeEffect, 1200);
+
+        } else if (isDeleting && charIndex === 0) {
+
+            isDeleting = false;
+            index = (index + 1) % texts.length;
+            setTimeout(typeEffect, 300);
+
+        } else {
+
+            setTimeout(typeEffect, isDeleting ? 50 : 100);
+
+        }
+
+    }
+
+    typeEffect();
+
+
+    // ===============================
+    // SKILL BAR ANIMATION
+    // ===============================
+    const skillBars = document.querySelectorAll(".skill-progress");
+
+    const skillObserver = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.style.width =
+                    entry.target.dataset.width;
+
+            }
+
+        });
+
     });
-};
 
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+    skillBars.forEach(bar => {
 
-// ===== TYPEWRITER EFFECT FOR HERO TAGLINE =====
-const tagline = document.querySelector('.hero-content p');
-const text = tagline.innerText;
-tagline.innerText = '';
-let index = 0;
+        skillObserver.observe(bar);
 
-const typeWriter = () => {
-    if (index < text.length) {
-        tagline.innerText += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, 60);
-    }
-};
-
-window.addEventListener('load', typeWriter);
-
-// ===== BACK TO TOP BUTTON =====
-const backToTop = document.createElement('button');
-backToTop.innerText = '↑';
-backToTop.id = 'back-to-top';
-document.body.appendChild(backToTop);
-
-backToTop.style.cssText = `
-position: fixed;
-bottom: 30px;
-right: 30px;
-padding: 0.8rem 1rem;
-border: none;
-border-radius: 50%;
-background: #fbbf24;
-color: #1e293b;
-font-size: 1.5rem;
-cursor: pointer;
-display: none;
-z-index: 999;
-box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-transition: all 0.3s;
-`;
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.style.display = 'block';
-    } else {
-        backToTop.style.display = 'none';
-    }
-});
-
-// ===== FLOATING PARTICLES BACKGROUND =====
-const canvas = document.createElement('canvas');
-canvas.id = 'particles';
-document.body.appendChild(canvas);
-const ctx = canvas.getContext('2d');
-
-canvas.style.cssText = `
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-pointer-events: none;
-z-index: -1;
-`;
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particlesArray = [];
-const particleCount = 80;
-
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-        this.color = `rgba(255, 191, 36, ${Math.random()})`;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-    }
-    draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-
-function initParticles() {
-    for (let i = 0; i < particleCount; i++) {
-        particlesArray.push(new Particle());
-    }
-}
-
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesArray.forEach(p => {
-        p.update();
-        p.draw();
     });
-    requestAnimationFrame(animateParticles);
-}
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    // ===============================
+    // PROJECT CARD TILT EFFECT
+    // ===============================
+    const cards = document.querySelectorAll(".project-card");
+
+    cards.forEach(card => {
+
+        card.addEventListener("mousemove", e => {
+
+            const rect = card.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
+
+            card.style.transform =
+                `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform =
+                "rotateX(0) rotateY(0)";
+
+        });
+
+    });
+
+
+    // ===============================
+    // BACK TO TOP BUTTON
+    // ===============================
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 300) {
+
+            backToTop?.classList.add("show");
+
+        } else {
+
+            backToTop?.classList.remove("show");
+
+        }
+
+    });
+
+    backToTop?.addEventListener("click", () => {
+
+        window.scrollTo({
+
+            top: 0,
+            behavior: "smooth"
+
+        });
+
+    });
+
+
+    // ===============================
+    // CURSOR GLOW EFFECT
+    // ===============================
+    const cursor = document.createElement("div");
+
+    cursor.classList.add("cursor-glow");
+
+    document.body.appendChild(cursor);
+
+    document.addEventListener("mousemove", e => {
+
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+
+    });
+
+
+    // ===============================
+    // CONTACT FORM ANIMATION
+    // ===============================
+    const form = document.getElementById("contactForm");
+
+    form?.addEventListener("submit", function () {
+
+        const btn = form.querySelector("button");
+
+        btn.innerHTML = "Sending...";
+        btn.disabled = true;
+
+    });
+
 });
-
-initParticles();
-animateParticles();
